@@ -1,22 +1,15 @@
+import { useState } from "react";
 import { Graph } from "react-d3-graph";
+import GraphModalForm from "./GraphModalForm";
+import { IGraph } from "./GraphUtil";
 
-// graph payload (with minimalist structure)
-const data = {
-  nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
-  links: [
-    { source: "Harry", target: "Sally" },
-    { source: "Harry", target: "Alice" },
-  ],
-};
-
-// the graph configuration, just override the ones you need
 const myConfig = {
+  automaticRearrangeAfterDropNode: true,
   nodeHighlightBehavior: true,
   height: window.innerHeight,
   width: window.innerWidth,
-  collapsible: true,
   node: {
-    color: "lightgreen",
+    color: "green",
     size: 320,
     highlightStrokeColor: "blue",
   },
@@ -24,25 +17,26 @@ const myConfig = {
     highlightColor: "red",
   },
 };
-
-const GraphComponent = () => {
-  const onClickNode = function (nodeId: any) {
-    window.alert(`Clicked node ${nodeId}`);
-  };
-
-  const onClickLink = function (source: any, target: any) {
-    window.alert(`Clicked link between ${source} and ${target}`);
+const data = {
+  nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
+  links: [
+    { source: "Harry", target: "Sally" },
+    { source: "Harry", target: "Alice" },
+  ],
+};
+const GraphView = () => {
+  const [state, setstate] = useState(data);
+  const getGraph = (graph: IGraph) => {
+    console.log("graph", graph);
+    setstate(graph);
   };
 
   return (
-    <Graph
-      id="graph-id" // id is mandatory
-      data={data}
-      config={myConfig}
-      onClickNode={onClickNode}
-      onClickLink={onClickLink}
-    />
+    <>
+      <GraphModalForm getGraph={getGraph} />
+      <Graph id="graph-id" data={state} config={myConfig} />
+    </>
   );
 };
 
-export default GraphComponent;
+export default GraphView;

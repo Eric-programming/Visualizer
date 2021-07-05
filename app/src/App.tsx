@@ -1,13 +1,11 @@
 import "./App.css";
-import GraphForm from "./Pages/Graph/GraphForm";
-import GraphComponent from "./Pages/Graph/GraphView";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import GraphView from "./Pages/Graph/GraphView";
 function App() {
   return (
-    <div className="App">
-      <GraphForm />
-      <GraphComponent />
-    </div>
+    <>
+      <GraphView />
+    </>
   );
 }
 

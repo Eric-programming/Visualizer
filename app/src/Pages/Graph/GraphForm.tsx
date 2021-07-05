@@ -1,44 +1,32 @@
-import { FormBuilder, FieldGroup, FieldControl, Validators } from "react-reactive-form";
-import TextInput from "../../Form/TextInput";
-const GraphForm = () => {
-  const loginForm = FormBuilder.group({
-    username: ["", Validators.required],
-    password: ["", Validators.required],
-    rememberMe: false,
-  });
-  const handleReset = () => {
-    loginForm.reset();
-  };
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("Form values", loginForm.value);
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { convertEdgesToLink, convertInputToData, IGraph, IState, validation } from "./GraphUtil";
+
+const initialValues: IState = { graph: "" };
+
+type Props = {
+  save: (graph: IGraph) => void;
+};
+const GraphForm = ({ save }: Props) => {
+  const submit = (values: any) => {
+    const matrix = convertInputToData(values.graph);
+    const graph = convertEdgesToLink(matrix);
+    save(graph);
   };
   return (
-    <FieldGroup
-      control={loginForm}
-      render={({ get, invalid }) => (
-        <form onSubmit={handleSubmit}>
-          <FieldControl name="username" render={TextInput} meta={{ label: "Username" }} />
-
-          <FieldControl name="password" render={TextInput} meta={{ label: "Password" }} />
-
-          <FieldControl
-            name="rememberMe"
-            render={({ handler }) => (
-              <div>
-                <input {...handler("checkbox")} />
-              </div>
-            )}
-          />
-          <button type="button" onClick={handleReset}>
-            Reset
+    <Formik initialValues={initialValues} validate={validation} onSubmit={submit}>
+      {({ errors, handleSubmit }) => (
+        <Form className="text-center" onSubmit={handleSubmit}>
+          <Field type="graph" name="graph" />
+          <button type="submit" disabled={Object.keys(errors).length > 0}>
+            Save
           </button>
-          <button type="submit" disabled={invalid}>
-            Submit
-          </button>
-        </form>
+          <br />
+          <span className="text-danger">
+            <ErrorMessage name="graph" component="div" />
+          </span>
+        </Form>
       )}
-    />
+    </Formik>
   );
 };
 
