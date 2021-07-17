@@ -1,3 +1,5 @@
+import { IState } from '../../../Common/interface';
+
 interface INode {
   id: string;
 }
@@ -9,12 +11,6 @@ export interface IGraph {
   nodes: INode[];
   links: ILink[];
 }
-export interface IState {
-  graph: string;
-}
-export interface IError {
-  graph?: string;
-}
 
 export const convertInputToData = (input: string) => {
   const temp = JSON.parse(input);
@@ -25,7 +21,7 @@ export const convertInputToData = (input: string) => {
   });
   return graph;
 };
-export const validation = (values: IState) => {
+export const validation = (values: IState): any => {
   const invalidInput = (input: string) => {
     let graph;
     try {
@@ -34,15 +30,16 @@ export const validation = (values: IState) => {
       return true;
     }
     if (!Array.isArray(graph) || graph.length === 0) return true;
-    const res: boolean = graph.some((subArray) => !Array.isArray(subArray) || subArray.length < 2);
+    const res: boolean = graph.some(
+      (subArray) => !Array.isArray(subArray) || subArray.length < 2
+    );
     return res;
   };
-  const { graph } = values;
-  const errors: IError = {};
+  const graph = values.input;
   if (!graph || invalidInput(graph)) {
-    errors.graph = "Invalid Graph (eg. [[1,2],[3,4]]";
+    return { input: 'Invalid Graph (eg. [[1,2],[3,4]])' };
   }
-  return errors;
+  return {};
 };
 export const convertEdgesToLink = (edges: string[][]): IGraph => {
   const graph: IGraph = {

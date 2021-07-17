@@ -1,0 +1,9 @@
+export const DIRECTED_GRAPH = 'directed-graph';
+export const BINARY_TREE_DFS = 'binary-tree-dfs';
+export const BINARY_TREE_BFS = 'binary-tree-bfs';
+export const NARY_TREE_BFS = 'nary-tree-bfs';
+export const UNDIRECTED_GRAPH = 'undirected-graph';
+export const CIRCULAR_LL = 'circular-ll';
+export const DOUBLY_LL = 'doubly-ll';
+export const SINGLY_LL = 'singly-ll';
+export const TRIE = 'trie';
