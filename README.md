@@ -4,11 +4,11 @@ Goal:
 
 Todos:
 
-- Query Params (shareable link for users to share with others). - 4 days (7/7/22)
 - Fix pointers - 2 days (7/10/22) - Done
   - Fixed screen shifting
 - Arrays 1D to 2D - 2 days (7/12/22)
 - Hash tables - 6 days (7/17/22)
+- Query Params (shareable link for users to share with others). - 4 days (7/7/22)
 - Unit testing for each induviual functions - 6 days (7/24/22)
 
 Backlog:
