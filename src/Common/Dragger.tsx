@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import Draggable from 'react-draggable';
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import Draggable from "react-draggable";
 
 const Drag = () => {
   const randomColor = () => {
@@ -20,9 +20,13 @@ const Dragger = () => {
   const addPointer = () => {
     let pointers = 0;
     try {
-      pointers = JSON.parse(prompt('How about pointers') ?? '1');
+      pointers = JSON.parse(prompt("How about pointers") ?? "1");
     } catch (error) {
       pointers = 1;
+    }
+    if (pointers > 25) {
+      alert("Max pointers is 25");
+      pointers = 25;
     }
     const arr = [];
     for (let index = 0; index < pointers; index++) {
@@ -33,7 +37,9 @@ const Dragger = () => {
   return (
     <>
       {state.map((Ele: any, index: number) => (
-        <div key={index}>{Ele}</div>
+        <div key={index} className="smaller">
+          {Ele}
+        </div>
       ))}
       <Button variant="primary" onClick={addPointer}>
         Add Pointer
