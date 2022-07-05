@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Graph } from 'react-d3-graph';
-import { IState } from '../../../Common/interface';
-import ModalForm from '../../../Common/ModalForm';
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { Graph } from "react-d3-graph";
+import { IState } from "../../../Common/interface";
+import ModalForm from "../../../Common/ModalForm";
 import {
   convertEdgesToLink,
   convertInputToData,
   IGraph,
   validation,
-} from './GraphUtil';
+} from "./GraphUtil";
 
 const commonConfig = {
   automaticRearrangeAfterDropNode: true,
@@ -15,22 +16,22 @@ const commonConfig = {
   height: window.innerHeight,
   width: window.innerWidth,
   node: {
-    color: 'green',
+    color: "green",
     size: 320,
-    highlightStrokeColor: 'blue',
+    highlightStrokeColor: "blue",
   },
   initialZoom: 3,
 
   link: {
-    highlightColor: 'red',
+    highlightColor: "red",
   },
 };
 const data: IGraph = {
-  nodes: [{ id: 'Harry' }, { id: 'Sally' }, { id: 'Alice' }],
+  nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
   links: [
-    { source: 'Harry', target: 'Sally' },
-    { source: 'Harry', target: 'Alice' },
-    { source: 'Harry', target: 'Harry' },
+    { source: "Harry", target: "Sally" },
+    { source: "Harry", target: "Alice" },
+    { source: "Harry", target: "Harry" },
   ],
 };
 type Props = {
@@ -48,11 +49,13 @@ const GraphView = ({ currentConfig, id }: Props) => {
   return (
     <>
       <ModalForm
-        initialValues={{ input: '[[1,2],[1,3],[1,4]]' }}
+        initialValues={{ input: "[[1,2],[1,3],[1,4]]" }}
         validation={validation}
         submit={getGraph}
         title="Input as Edges"
       />
+      {"\n"}
+      <br />
 
       <Graph
         id={id}
