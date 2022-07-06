@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import CommonForm from './Form';
+import { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import CommonForm from "./Form";
 
 type Props = {
   submit: (values: any) => void;
